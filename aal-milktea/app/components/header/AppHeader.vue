@@ -3,6 +3,7 @@ import { ref, watch, onMounted, onUnmounted } from "vue";
 
 const isScrolled = ref(false);
 const isMobileOpen = ref(false);
+const { scrollTo } = useLenis();
 
 const navLinks = [
   { label: "About", href: "#about" },
@@ -19,6 +20,19 @@ const handleScroll = () => {
 
 const closeMobile = () => {
   isMobileOpen.value = false;
+};
+
+// Smooth glide via composable
+const handleNavClick = (e: MouseEvent, target: string) => {
+  e.preventDefault();
+  closeMobile();
+  scrollTo(target, -84);
+};
+
+const handleLogoClick = (e: MouseEvent) => {
+  e.preventDefault();
+  closeMobile();
+  scrollTo(0);
 };
 
 // Scroll-lock the background page while mobile menu is open
@@ -51,8 +65,8 @@ onUnmounted(() => {
 <template>
   <header :class="[$style.headerWrapper, isScrolled ? $style.isScrolled : '']">
     <div :class="$style.navContainer">
-      <!-- Brand Logo -->
-      <NuxtLink to="/" :class="$style.brandLogo" @click="closeMobile">
+      <!-- Brand Logo (smooth scroll to top) -->
+      <a href="#" :class="$style.brandLogo" @click="handleLogoClick">
         <img
           src="/images/aal-pin.png"
           alt="AAL Group Logo"
@@ -62,20 +76,32 @@ onUnmounted(() => {
           <span :class="$style.brandTitle">AAL Group</span>
           <span :class="$style.brandMotto">Together, we grow</span>
         </div>
-      </NuxtLink>
+      </a>
 
       <!-- Desktop Nav -->
       <nav aria-label="Main Navigation" :class="$style.desktopNav">
         <ul :class="$style.navLinks">
           <li v-for="link in navLinks" :key="link.label">
-            <a :href="link.href" :class="$style.navLink">{{ link.label }}</a>
+            <a
+              :href="link.href"
+              :class="$style.navLink"
+              @click="handleNavClick($event, link.href)"
+            >
+              {{ link.label }}
+            </a>
           </li>
         </ul>
       </nav>
 
       <!-- Right Actions -->
       <div :class="$style.headerAction">
-        <a href="#contact" :class="$style.contactBtn">Get In Touch</a>
+        <a
+          href="#contact"
+          :class="$style.contactBtn"
+          @click="handleNavClick($event, '#contact')"
+        >
+          Get In Touch
+        </a>
 
         <button
           type="button"
@@ -132,7 +158,7 @@ onUnmounted(() => {
               :key="link.label"
               :href="link.href"
               :class="$style.mobileLink"
-              @click="closeMobile"
+              @click="handleNavClick($event, link.href)"
             >
               {{ link.label }}
             </a>
@@ -142,7 +168,7 @@ onUnmounted(() => {
             <a
               href="#contact"
               :class="$style.mobileContactBtn"
-              @click="closeMobile"
+              @click="handleNavClick($event, '#contact')"
             >
               Get In Touch
             </a>

@@ -1,4 +1,33 @@
 /* assets/css/main.css */
+
+/* 1. Official Lenis Reset */
+html.lenis,
+html.lenis-smooth {
+  height: auto;
+}
+
+html.lenis body,
+html.lenis-smooth body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+/* 2. Base Universal Resets */
 *,
 *::before,
 *::after {
@@ -7,6 +36,7 @@
   padding: 0;
 }
 
+/* 3. Document Root — Only HTML is the scroll viewport */
 html {
   font-family:
     "Inter",
@@ -21,33 +51,36 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  scroll-behavior: smooth;
-  /* Use clip instead of hidden to prevent secondary scrollbar creation */
-  overflow-x: clip;
+  scroll-behavior: auto !important;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: auto;
 }
 
+/* 4. Body & Nuxt Wrapper — Must stay completely open/visible */
 body {
   width: 100%;
   min-height: 100vh;
+  height: auto;
   margin: 0;
   padding: 0;
-  overflow-x: clip;
+  /* CRITICAL: Must be visible to prevent body from becoming a 2nd scroll container */
+  overflow: visible !important;
 }
 
-/* Fallback for browsers that don't support overflow-x: clip yet */
-@supports not (overflow-x: clip) {
-  html,
-  body {
-    overflow-x: hidden;
-  }
+#__nuxt {
+  min-height: 100vh;
+  height: auto;
+  position: relative;
+  overflow: visible !important;
 }
 
-/* Confine AOS offscreen transforms inside the main wrapper */
+/* 5. Main Container — Catches any wide components (like the Map or AOS cards) */
 main {
   width: 100%;
   max-width: 100%;
-  overflow-x: clip;
   position: relative;
+  overflow-x: hidden;
 }
 
 a {
@@ -57,4 +90,75 @@ a {
 
 button {
   font-family: inherit;
+}
+
+/* 6. GPU Acceleration for AOS */
+[data-aos] {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+[data-aos].aos-animate {
+  transition-property: transform, opacity !important;
+}
+/* ==========================================================================
+   AOS CONFINEMENT OVERRIDE
+   ========================================================================== */
+
+/* Prevent AOS body attributes from hijacking scroll */
+body[data-aos-easing],
+body[data-aos-duration],
+body[data-aos-delay] {
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+}
+
+/* Confine off-screen AOS animated elements so they don't stretch the document */
+[data-aos] {
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* ==========================================================================
+   SCROLLBAR & LAYOUT FIX (Fixed Header Safe)
+   ========================================================================== */
+
+html,
+html.lenis,
+html.lenis-smooth,
+html.lenis-scrolling {
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+  scrollbar-gutter: stable !important;
+  height: auto !important;
+}
+
+/* body must NEVER have contain: paint or overflow restrictions */
+body,
+html.lenis body,
+html.lenis-scrolling body {
+  overflow: visible !important;
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  contain: none !important; /* Ensures position: fixed works relative to viewport */
+  position: static !important;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+/* Confine off-screen AOS transforms strictly to <main> */
+main {
+  width: 100%;
+  max-width: 100%;
+  position: relative;
+  overflow-x: clip !important;
+  contain: paint; /* Keeps all animated sections inside without touching header */
+}
+
+/* Guard individual animated nodes */
+[data-aos] {
+  contain: layout;
 }
