@@ -21,7 +21,7 @@ export const defaultHubs: NetworkHub[] = [
     lng: 120.9842,
     lat: 14.5995,
     specialty:
-      "Central Distribution, Commercial Operations & Freight Logistics[cite: 3, 4]",
+      "Central Distribution, Commercial Operations & Freight Logistics[cite: 4]",
     badge: "HQ",
   },
   {
@@ -43,7 +43,7 @@ export const defaultHubs: NetworkHub[] = [
     lng: 120.075,
     lat: 29.3069,
     specialty:
-      "Machinery, industrial OEM/ODM & general goods manufacturing[cite: 3, 4]",
+      "Machinery, industrial OEM/ODM & general goods manufacturing[cite: 4]",
     badge: "Machinery",
   },
   {
@@ -54,7 +54,7 @@ export const defaultHubs: NetworkHub[] = [
     lng: 100.5018,
     lat: 13.7563,
     specialty:
-      "Food & beverage ingredients sourcing & regional logistics[cite: 3, 4]",
+      "Food & beverage ingredients sourcing & regional logistics[cite: 4]",
     badge: "Food & Logistics",
   },
   {
@@ -64,7 +64,7 @@ export const defaultHubs: NetworkHub[] = [
     city: "Hanoi",
     lng: 105.8544,
     lat: 21.0285,
-    specialty: "Apparel & artisanal crafts sourcing and export[cite: 3, 4]",
+    specialty: "Apparel & artisanal crafts sourcing and export[cite: 4]",
     badge: "Apparel & Crafts",
   },
   {
@@ -86,7 +86,7 @@ export const defaultHubs: NetworkHub[] = [
     lng: 9.9937,
     lat: 53.5511,
     specialty:
-      "Nutritional supplements, active formulas & EU compliance standards[cite: 3, 4]",
+      "Nutritional supplements, active formulas & EU compliance standards[cite: 4]",
     badge: "Supplements",
   },
   {
@@ -97,7 +97,7 @@ export const defaultHubs: NetworkHub[] = [
     lng: 2.3522,
     lat: 48.8566,
     specialty:
-      "Fine fragrance, luxury perfumery & premium skincare sourcing[cite: 3, 4]",
+      "Fine fragrance, luxury perfumery & premium skincare sourcing[cite: 4]",
     badge: "Perfume & Luxury",
   },
   {
@@ -108,7 +108,7 @@ export const defaultHubs: NetworkHub[] = [
     lng: 9.19,
     lat: 45.4642,
     specialty:
-      "Artisanal coffee, luxury private label development & goods[cite: 3, 4]",
+      "Artisanal coffee, luxury private label development & goods[cite: 4]",
     badge: "Coffee & Luxury",
   },
   {
@@ -119,7 +119,7 @@ export const defaultHubs: NetworkHub[] = [
     lng: 21.0122,
     lat: 52.2297,
     specialty:
-      "Hygiene products & CE-certified medical supplies sourcing[cite: 3, 4]",
+      "Hygiene products & CE-certified medical supplies sourcing[cite: 4]",
     badge: "Medical Supplies",
   },
   {
@@ -130,7 +130,7 @@ export const defaultHubs: NetworkHub[] = [
     lng: 151.2093,
     lat: -33.8688,
     specialty:
-      "Ocean freight forwarding & Oceania trading partner network[cite: 3, 4]",
+      "Ocean freight forwarding & Oceania trading partner network[cite: 4]",
     badge: "Oceania Trade",
   },
 ];
@@ -148,6 +148,7 @@ export function useTradeMap(
   const projectedHubs = ref<ProjectedHub[]>([]);
   const mapInstance = shallowRef<any>(null);
   let resizeObserver: ResizeObserver | null = null;
+  let intersectionObserver: IntersectionObserver | null = null;
 
   const updateProjections = () => {
     if (!mapInstance.value) return;
@@ -174,6 +175,14 @@ export function useTradeMap(
   };
 
   onMounted(async () => {
+    if (!document.getElementById("maplibre-gl-core-css")) {
+      const link = document.createElement("link");
+      link.id = "maplibre-gl-core-css";
+      link.rel = "stylesheet";
+      link.href = "https://unpkg.com/maplibre-gl@latest/dist/maplibre-gl.css";
+      document.head.appendChild(link);
+    }
+
     const maplibre = await import("maplibre-gl");
     if (!containerRef.value) return;
 
@@ -215,13 +224,16 @@ export function useTradeMap(
     mapInstance.value = map;
 
     map.on("load", () => {
-      map.resize();
-      updateProjections();
+      requestAnimationFrame(() => {
+        map.resize();
+        updateProjections();
+      });
     });
 
     map.on("render", updateProjections);
     map.on("move", updateProjections);
 
+    // ResizeObserver watches pixel dimensions directly
     if (containerRef.value && window.ResizeObserver) {
       resizeObserver = new ResizeObserver(() => {
         map.resize();
@@ -229,12 +241,27 @@ export function useTradeMap(
       });
       resizeObserver.observe(containerRef.value);
     }
+
+    // IntersectionObserver triggers an automatic repaint the moment the user scrolls down to this section
+    if (containerRef.value && window.IntersectionObserver) {
+      intersectionObserver = new IntersectionObserver((entries) => {
+        if (entries[0]?.isIntersecting) {
+          map.resize();
+          updateProjections();
+        }
+      });
+      intersectionObserver.observe(containerRef.value);
+    }
   });
 
   onUnmounted(() => {
     if (resizeObserver) {
       resizeObserver.disconnect();
       resizeObserver = null;
+    }
+    if (intersectionObserver) {
+      intersectionObserver.disconnect();
+      intersectionObserver = null;
     }
     if (mapInstance.value) {
       mapInstance.value.remove();
