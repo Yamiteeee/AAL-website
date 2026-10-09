@@ -157,7 +157,9 @@
   font-size: 0.7rem;
   color: #9494a0;
 }
-
+.mapArea {
+  overscroll-behavior: contain;
+}
 .mapArea {
   position: relative;
   width: 100%;

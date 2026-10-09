@@ -17,7 +17,7 @@ import AppFooter from "@/components/footer/AppFooter.vue";
     <main>
       <HeroSection data-aos="fade-up" />
       <AboutSection data-aos="fade-up" />
-      <GlobalNetworkSection data-aos="fade-up" />
+      <GlobalNetworkSection />
       <CoreServicesSection data-aos="fade-up" />
       <FoundersValuesSection data-aos="fade-up" />
       <FoundersSection data-aos="fade-up" />

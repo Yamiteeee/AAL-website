@@ -3,66 +3,79 @@ import { ref, onMounted, onUnmounted } from "vue";
 
 interface Props {
   target: number;
-  duration?: number; // duration in milliseconds (default: 2000ms)
-  prefix?: string; // e.g. "$" or "+"
-  suffix?: string; // e.g. "%" or "k+"
-  decimals?: number; // number of decimal places (default: 0)
+  duration?: number;
+  prefix?: string;
+  suffix?: string;
+  decimals?: number;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  duration: 2000,
+  duration: 1800,
   prefix: "",
   suffix: "",
   decimals: 0,
 });
 
-const currentDisplay = ref(
-  `${props.prefix}${Number(0).toFixed(props.decimals)}${props.suffix}`,
-);
 const counterRef = ref<HTMLElement | null>(null);
+
+// 1. Cache the formatter ONCE upfront instead of re-instantiating on every tick
+const formatter = new Intl.NumberFormat(undefined, {
+  minimumFractionDigits: props.decimals,
+  maximumFractionDigits: props.decimals,
+});
+
+const format = (val: number): string => {
+  return `${props.prefix}${formatter.format(val)}${props.suffix}`;
+};
+
+// Initial SSR / hydration content
+const initialDisplay = format(0);
+
 let observer: IntersectionObserver | null = null;
+let rafId: number | null = null;
 let hasAnimated = false;
 
+// Exponential ease-out
 const easeOutExpo = (t: number): number => {
   return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
 };
 
 const animateCount = () => {
-  if (hasAnimated) return;
+  if (hasAnimated || !counterRef.value) return;
   hasAnimated = true;
 
+  const targetEl = counterRef.value;
   const startTime = performance.now();
   const endValue = props.target;
+  let lastFormattedValue = -1;
 
   const update = (now: number) => {
     const elapsed = now - startTime;
     const progress = Math.min(elapsed / props.duration, 1);
     const easedProgress = easeOutExpo(progress);
-
     const currentValue = easedProgress * endValue;
 
-    currentDisplay.value = `${props.prefix}${currentValue.toLocaleString(
-      undefined,
-      {
-        minimumFractionDigits: props.decimals,
-        maximumFractionDigits: props.decimals,
-      },
-    )}${props.suffix}`;
+    // Only touch the DOM when the rounded display number actually changes
+    const roundedComparison =
+      props.decimals > 0
+        ? Math.round(currentValue * Math.pow(10, props.decimals))
+        : Math.floor(currentValue);
+
+    if (roundedComparison !== lastFormattedValue) {
+      lastFormattedValue = roundedComparison;
+      // Direct DOM update bypasses Vue's virtual DOM diffing engine entirely
+      targetEl.textContent = format(currentValue);
+    }
 
     if (progress < 1) {
-      requestAnimationFrame(update);
+      rafId = requestAnimationFrame(update);
     } else {
-      currentDisplay.value = `${props.prefix}${endValue.toLocaleString(
-        undefined,
-        {
-          minimumFractionDigits: props.decimals,
-          maximumFractionDigits: props.decimals,
-        },
-      )}${props.suffix}`;
+      targetEl.textContent = format(endValue);
+      rafId = null;
     }
   };
 
-  requestAnimationFrame(update);
+  rafId = requestAnimationFrame(update);
 };
 
 onMounted(() => {
@@ -70,22 +83,22 @@ onMounted(() => {
 
   observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          animateCount();
-          if (observer && counterRef.value) {
-            observer.unobserve(counterRef.value);
-          }
-        }
-      });
+      if (entries[0]?.isIntersecting) {
+        animateCount();
+        observer?.disconnect();
+        observer = null;
+      }
     },
-    { threshold: 0.3 },
+    { threshold: 0.2 },
   );
 
   observer.observe(counterRef.value);
 });
 
 onUnmounted(() => {
+  if (rafId !== null) {
+    cancelAnimationFrame(rafId);
+  }
   if (observer) {
     observer.disconnect();
     observer = null;
@@ -94,5 +107,5 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <span ref="counterRef">{{ currentDisplay }}</span>
+  <span ref="counterRef">{{ initialDisplay }}</span>
 </template>

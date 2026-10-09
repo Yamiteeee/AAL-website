@@ -35,35 +35,22 @@ const { hubs, activeHub, projectedHubs, focusHub } = useTradeMap(mapContainer);
           </span>
         </div>
 
-        <div :class="$style.mapArea">
-          <div ref="mapContainer" :class="$style.mapContainer" />
+        <!-- data-lenis-prevent intercepts mouse wheel events so the page does not scroll while zooming -->
+        <div :class="$style.mapArea" data-lenis-prevent>
+          <div
+            ref="mapContainer"
+            :class="$style.mapContainer"
+            data-lenis-prevent
+          />
 
           <!-- Dynamic SVG Brand Teardrop Pins Overlay -->
-          <svg :class="$style.mapOverlay">
-            <defs>
-              <filter
-                id="network-pin-shadow"
-                x="-30%"
-                y="-30%"
-                width="160%"
-                height="160%"
-              >
-                <feDropShadow
-                  dx="0"
-                  dy="2.5"
-                  stdDeviation="2"
-                  flood-color="#000000"
-                  flood-opacity="0.28"
-                />
-              </filter>
-            </defs>
-
+          <svg :class="$style.mapOverlay" data-lenis-prevent>
             <g>
               <g
                 v-for="hub in projectedHubs"
                 :key="'pin-' + hub.id"
                 :transform="`translate(${hub.x}, ${hub.y})`"
-                style="cursor: pointer"
+                :class="$style.pinGroup"
                 @click="focusHub(hub)"
               >
                 <!-- Active Target Pulse Ring -->
@@ -79,27 +66,22 @@ const { hubs, activeHub, projectedHubs, focusHub } = useTradeMap(mapContainer);
                   stroke-dasharray="2, 2"
                 />
 
-                <!-- Pin Wrapper -->
+                <!-- Pin Wrapper (uses GPU CSS drop-shadow instead of CPU feDropShadow) -->
                 <g
                   :transform="
                     activeHub.id === hub.id
                       ? 'scale(1.15) translate(0, -2)'
                       : 'scale(1)'
                   "
-                  style="
-                    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-                  "
+                  :class="$style.pinShape"
                 >
-                  <!-- Solid Black Teardrop Pin Silhouette -->
                   <path
                     d="M0 0 C-4 -7 -17 -19 -17 -30 C-17 -40 -9 -47 0 -47 C9 -47 17 -40 17 -30 C17 -19 4 -7 0 0 Z"
                     fill="#111111"
                     stroke="#ffffff"
                     stroke-width="1.2"
-                    filter="url(#network-pin-shadow)"
                   />
 
-                  <!-- Solid White Inner Medallion -->
                   <circle
                     cx="0"
                     cy="-30"
@@ -109,7 +91,6 @@ const { hubs, activeHub, projectedHubs, focusHub } = useTradeMap(mapContainer);
                     stroke-width="0.8"
                   />
 
-                  <!-- Brand PNG Logo -->
                   <image
                     href="/images/aal-pin.png"
                     x="-9"
