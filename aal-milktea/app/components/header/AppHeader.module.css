@@ -153,10 +153,50 @@
   width: 100%;
 }
 
+/* ==========================================================================
+   Header Actions & SaaS Link
+   ========================================================================== */
+
 .headerAction {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 0.75rem;
+}
+
+.saasBtn {
+  display: none;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  color: #0f172a;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  padding: 0.5rem 0.95rem;
+  border-radius: 6px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (min-width: 768px) {
+  .saasBtn {
+    display: inline-flex;
+  }
+}
+
+.saasBtn:hover {
+  background: #e2e8f0;
+  border-color: #cbd5e1;
+  transform: translateY(-1px);
+}
+
+.saasDot {
+  width: 6px;
+  height: 6px;
+  border-radius: 9999px;
+  background-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.25);
 }
 
 .contactBtn {
@@ -265,6 +305,26 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+}
+
+.mobileSaasBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #0f172a !important;
+  font-size: 0.92rem;
+  font-weight: 750;
+  padding: 0.8rem 1.25rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.mobileSaasBtn:hover {
+  background: #e2e8f0;
 }
 
 .mobileContactBtn {
