@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Section Base & Desktop Screen Fit (Soft Charcoal)
+   Section Base & Desktop Screen Fit (Soft Charcoal Background)
    ========================================================================== */
 
 .whySection {
@@ -96,7 +96,7 @@
 }
 
 /* ==========================================================================
-   5-Card Advantage Matrix (2 Top, 3 Bottom on Desktop)
+   5-Card Advantage Matrix (Slate Grey Cards with Off-Black Text)
    ========================================================================== */
 
 .advantageGrid {
@@ -129,25 +129,31 @@
 }
 
 .advantageCard {
-  background: #28282e;
-  border: 1px solid #383842;
+  background: #e2e4e9;
+  border: 1px solid #cbced6;
   border-radius: 12px;
   padding: 1.45rem 1.4rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   gap: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.18),
+    0 12px 24px -8px rgba(0, 0, 0, 0.25);
   transition:
     transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.2s ease,
+    background-color 0.2s ease,
     box-shadow 0.2s ease;
 }
 
 .advantageCard:hover {
   transform: translateY(-2px);
-  border-color: #525260;
-  box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.3);
+  background-color: #ebedf2;
+  border-color: #b5b8c1;
+  box-shadow:
+    0 4px 8px -2px rgba(0, 0, 0, 0.25),
+    0 18px 32px -10px rgba(0, 0, 0, 0.35);
 }
 
 .cardTop {
@@ -161,13 +167,13 @@
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  background-color: #222227;
-  border: 1px solid #383842;
+  background-color: #d7dae0;
+  border: 1px solid #cbced6;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #f1f1f4;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  color: #0b0c0e;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   transition:
     background-color 0.2s ease,
     border-color 0.2s ease,
@@ -175,9 +181,9 @@
 }
 
 .advantageCard:hover .iconWrapper {
-  background-color: #ffffff;
-  color: #18181c;
-  border-color: #ffffff;
+  background-color: #18181b;
+  color: #ffffff;
+  border-color: #18181b;
 }
 
 .scopeTag {
@@ -185,9 +191,9 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #d4d4dc;
-  background: #33333b;
-  border: 1px solid #43434e;
+  color: #27292e;
+  background: #d7dae0;
+  border: 1px solid #cbced6;
   padding: 2px 7px;
   border-radius: 4px;
 }
@@ -202,7 +208,7 @@
   font-size: 1.08rem;
   font-weight: 850;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: #0b0c0e;
   margin: 0;
   line-height: 1.3;
 }
@@ -210,7 +216,7 @@
 .cardDescription {
   font-size: 0.84rem;
   line-height: 1.58;
-  color: #b0b0ba;
+  color: #3b3e45;
   margin: 0;
   letter-spacing: -0.005em;
 }

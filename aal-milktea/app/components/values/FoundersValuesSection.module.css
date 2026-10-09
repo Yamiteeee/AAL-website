@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Section Base & Desktop Screen Fit (Soft Charcoal)
+   Section Base & Desktop Screen Fit (Soft Charcoal Background)
    ========================================================================== */
 
 .valuesSection {
@@ -103,21 +103,21 @@
   max-width: 560px;
 }
 
-/* Operational Principles Card */
+/* Operational Principles Card (Slate Grey with Off-Black Text) */
 .commitmentCard {
-  background: #28282e;
-  border: 1px solid #383842;
+  background: #e2e4e9;
+  border: 1px solid #cbced6;
   border-radius: 12px;
   padding: 1.4rem 1.5rem;
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.15),
-    0 16px 32px -10px rgba(0, 0, 0, 0.25);
+    0 4px 6px -1px rgba(0, 0, 0, 0.25),
+    0 16px 32px -10px rgba(0, 0, 0, 0.35);
 }
 
 .commitmentCardTitle {
   font-size: 0.95rem;
-  font-weight: 800;
-  color: #ffffff;
+  font-weight: 850;
+  color: #0b0c0e;
   margin: 0 0 0.4rem;
   letter-spacing: -0.015em;
 }
@@ -125,13 +125,13 @@
 .commitmentCardText {
   font-size: 0.85rem;
   line-height: 1.55;
-  color: #b0b0ba;
+  color: #3b3e45;
   margin: 0;
   letter-spacing: -0.005em;
 }
 
 /* ==========================================================================
-   Right Column: 2x2 Values Matrix
+   Right Column: 2x2 Values Matrix (Slate Grey Cards)
    ========================================================================== */
 
 .matrixSide {
@@ -149,23 +149,30 @@
 }
 
 .valueCard {
-  background: #28282e;
-  border: 1px solid #383842;
+  background: #e2e4e9;
+  border: 1px solid #cbced6;
   border-radius: 12px;
   padding: 1.35rem 1.25rem;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.18),
+    0 12px 24px -8px rgba(0, 0, 0, 0.25);
   transition:
     transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .valueCard:hover {
   transform: translateY(-2px);
-  border-color: #525260;
-  box-shadow: 0 14px 28px -8px rgba(0, 0, 0, 0.3);
+  background-color: #ebedf2;
+  border-color: #b5b8c1;
+  box-shadow:
+    0 4px 8px -2px rgba(0, 0, 0, 0.25),
+    0 18px 32px -10px rgba(0, 0, 0, 0.35);
 }
 
 .cardHeader {
@@ -178,15 +185,15 @@
 .valNumber {
   font-size: 1.05rem;
   font-weight: 850;
-  color: #ffffff;
+  color: #0b0c0e;
   letter-spacing: -0.02em;
 }
 
 .valTitle {
   font-size: 1.02rem;
-  font-weight: 800;
+  font-weight: 850;
   letter-spacing: -0.02em;
-  color: #ffffff;
+  color: #0b0c0e;
   margin: 0 0 0.5rem;
   line-height: 1.25;
 }
@@ -194,7 +201,7 @@
 .valDescription {
   font-size: 0.81rem;
   line-height: 1.55;
-  color: #b0b0ba;
+  color: #3b3e45;
   margin: 0;
   letter-spacing: -0.005em;
 }
