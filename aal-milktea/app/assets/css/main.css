@@ -7,8 +7,7 @@
   padding: 0;
 }
 
-html,
-body {
+html {
   font-family:
     "Inter",
     system-ui,
@@ -19,10 +18,36 @@ body {
     sans-serif;
   background-color: #fbfbfa;
   color: #111111;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  scroll-behavior: smooth;
+  /* Use clip instead of hidden to prevent secondary scrollbar creation */
+  overflow-x: clip;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
+}
+
+/* Fallback for browsers that don't support overflow-x: clip yet */
+@supports not (overflow-x: clip) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* Confine AOS offscreen transforms inside the main wrapper */
+main {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: clip;
+  position: relative;
 }
 
 a {

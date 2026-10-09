@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, watch, onMounted, onUnmounted } from "vue";
 
 const isScrolled = ref(false);
 const isMobileOpen = ref(false);
@@ -21,12 +21,30 @@ const closeMobile = () => {
   isMobileOpen.value = false;
 };
 
+// Scroll-lock the background page while mobile menu is open
+watch(isMobileOpen, (open) => {
+  if (typeof document !== "undefined") {
+    document.body.style.overflow = open ? "hidden" : "";
+  }
+});
+
+const handleKeydown = (e: KeyboardEvent) => {
+  if (e.key === "Escape" && isMobileOpen.value) {
+    closeMobile();
+  }
+};
+
 onMounted(() => {
   window.addEventListener("scroll", handleScroll, { passive: true });
+  window.addEventListener("keydown", handleKeydown);
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
+  window.removeEventListener("keydown", handleKeydown);
+  if (typeof document !== "undefined") {
+    document.body.style.overflow = "";
+  }
 });
 </script>
 
@@ -46,7 +64,7 @@ onUnmounted(() => {
         </div>
       </NuxtLink>
 
-      <!-- Desktop Nav Ordered by Page Flow -->
+      <!-- Desktop Nav -->
       <nav aria-label="Main Navigation" :class="$style.desktopNav">
         <ul :class="$style.navLinks">
           <li v-for="link in navLinks" :key="link.label">
@@ -68,24 +86,28 @@ onUnmounted(() => {
         >
           <svg
             v-if="!isMobileOpen"
-            width="22"
-            height="22"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="1.8"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           >
             <line x1="3" y1="7" x2="21" y2="7" />
             <line x1="3" y1="17" x2="21" y2="17" />
           </svg>
           <svg
             v-else
-            width="22"
-            height="22"
+            width="24"
+            height="24"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="1.8"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
           >
             <line x1="18" y1="6" x2="6" y2="18" />
             <line x1="6" y1="6" x2="18" y2="18" />
@@ -95,28 +117,37 @@ onUnmounted(() => {
     </div>
 
     <!-- Mobile Navigation Drawer -->
-    <Transition name="fade">
-      <div v-if="isMobileOpen" :class="$style.mobileMenu">
-        <div :class="$style.mobileLinks">
-          <a
-            v-for="link in navLinks"
-            :key="link.label"
-            :href="link.href"
-            :class="$style.mobileLink"
-            @click="closeMobile"
-          >
-            {{ link.label }}
-          </a>
-        </div>
-        <div :class="$style.mobileFooter">
-          <a
-            href="#contact"
-            :class="$style.mobileContactBtn"
-            @click="closeMobile"
-          >
-            Get In Touch
-          </a>
-          <span :class="$style.mobileEmail">global@aalgroup.asia</span>
+    <Transition
+      :enter-active-class="$style.menuEnterActive"
+      :leave-active-class="$style.menuLeaveActive"
+      :enter-from-class="$style.menuEnterFrom"
+      :leave-to-class="$style.menuLeaveTo"
+    >
+      <div v-if="isMobileOpen" :class="$style.mobileMenuWrapper">
+        <div :class="$style.mobileBackdrop" @click="closeMobile" />
+        <div :class="$style.mobileMenu">
+          <nav :class="$style.mobileLinks">
+            <a
+              v-for="link in navLinks"
+              :key="link.label"
+              :href="link.href"
+              :class="$style.mobileLink"
+              @click="closeMobile"
+            >
+              {{ link.label }}
+            </a>
+          </nav>
+
+          <div :class="$style.mobileFooter">
+            <a
+              href="#contact"
+              :class="$style.mobileContactBtn"
+              @click="closeMobile"
+            >
+              Get In Touch
+            </a>
+            <span :class="$style.mobileEmail">global@aalgroup.asia</span>
+          </div>
         </div>
       </div>
     </Transition>

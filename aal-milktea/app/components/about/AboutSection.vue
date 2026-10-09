@@ -1,3 +1,7 @@
+<script setup lang="ts">
+import AnimatedCounter from "@/components/common/AnimatedCounter.vue";
+</script>
+
 <template>
   <section id="about" :class="$style.aboutSection">
     <div :class="$style.sectionContent">
@@ -35,7 +39,9 @@
           </p>
           <div :class="$style.storyFooter">
             <div :class="$style.facilityStat">
-              <span :class="$style.statNumber">1,000s</span>
+              <span :class="$style.statNumber">
+                <AnimatedCounter :target="1000" suffix="s" :duration="2000" />
+              </span>
               <span :class="$style.statLabel"
                 >Daily Pallets &amp; Cartons Dispatched</span
               >
