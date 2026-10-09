@@ -1,0 +1,64 @@
+/* Container Viewport */
+.aal-map-viewport {
+  width: 100%;
+  height: 540px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f4f3f0;
+  border: 1px solid #e5e5e5;
+  position: relative;
+}
+
+/* Base Hub Pin */
+.aal-marker {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #18181b;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  display: block;
+  transition:
+    transform 0.2s cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 0.2s ease;
+}
+
+.aal-marker:hover {
+  transform: scale(1.35);
+  background-color: #000000;
+}
+
+/* Manila Headquarters Hub (Default) */
+.aal-marker-hq {
+  width: 16px;
+  height: 16px;
+  background-color: #000000;
+  border: 2.5px solid #ffffff;
+  box-shadow:
+    0 0 0 4px rgba(0, 0, 0, 0.18),
+    0 3px 8px rgba(0, 0, 0, 0.45);
+}
+
+/* Active Highlight (When Hub is clicked) */
+.aal-marker-active {
+  transform: scale(1.4) !important;
+  background-color: #000000 !important;
+  box-shadow:
+    0 0 0 4px rgba(24, 24, 27, 0.25),
+    0 4px 10px rgba(0, 0, 0, 0.4) !important;
+}
+/* Map canvas viewport */
+.mapContainer {
+  width: 100%;
+  height: 540px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #f4f3f0;
+  border: 1px solid #e5e5e5;
+  position: relative;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.04);
+}

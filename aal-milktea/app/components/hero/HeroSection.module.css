@@ -1,0 +1,293 @@
+.heroSection {
+  position: relative;
+  background-color: #fbfbfa;
+  color: #111111;
+  padding: 6.5rem 2rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.heroContent {
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Header Text */
+.topHeader {
+  display: flex;
+  flex-direction: column;
+  max-width: 820px;
+}
+
+.taglineBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #71717a;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+
+.taglineBadge::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #18181b;
+}
+
+.headline {
+  font-size: 2.45rem;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #09090b;
+}
+
+@media (min-width: 768px) {
+  .headline {
+    font-size: 3.5rem;
+  }
+}
+
+.subheadline {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #52525b;
+  margin-top: 1rem;
+  max-width: 720px;
+}
+
+/* Map Shell */
+.mapWrapper {
+  position: relative;
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.03),
+    0 20px 40px -15px rgba(0, 0, 0, 0.05);
+}
+
+.mapControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid #f4f4f5;
+  margin-bottom: 0.85rem;
+}
+
+.mapStatus {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #18181b;
+}
+
+.statusIndicator {
+  width: 7px;
+  height: 7px;
+  background-color: #10b981;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  animation: pulse 2.2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.4;
+    transform: scale(1.2);
+  }
+}
+
+.mapInstructions {
+  font-size: 0.74rem;
+  color: #a1a1aa;
+  font-weight: 500;
+}
+
+/* Container enclosing canvas + SVG overlay */
+.mapArea {
+  position: relative;
+  width: 100%;
+  height: 540px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid #e5e5e5;
+}
+
+.mapContainer {
+  width: 100%;
+  height: 100%;
+  background: #f4f3f0;
+}
+
+.mapOverlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.mapOverlay g {
+  pointer-events: auto;
+}
+
+/* Animated Dash Corridor Path */
+.flowLine {
+  stroke-dasharray: 6, 6;
+  animation: flowingCorridor 2.5s linear infinite;
+}
+
+@keyframes flowingCorridor {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Inspector Panel */
+.inspectorBar {
+  margin-top: 1rem;
+  padding: 1.15rem 1.35rem;
+  background: #fafafa;
+  border: 1px solid #f4f4f5;
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+
+.activeInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.activeCountry {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #09090b;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.activeCity {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #71717a;
+}
+
+.badgePill {
+  font-size: 0.68rem;
+  background: #ffffff;
+  color: #18181b;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+  border: 1px solid #e4e4e7;
+  letter-spacing: 0.04em;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.activeRole {
+  font-size: 0.88rem;
+  color: #52525b;
+  line-height: 1.4;
+}
+
+/* Interactive Country Buttons */
+.hubPills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.hubPill {
+  padding: 0.4rem 0.85rem;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 6px;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #3f3f46;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hubPill:hover {
+  background: #f4f4f5;
+  border-color: #d4d4d8;
+  color: #18181b;
+  transform: translateY(-1px);
+}
+
+.activePill {
+  background: #18181b !important;
+  color: #ffffff !important;
+  border-color: #18181b !important;
+  box-shadow: 0 2px 8px rgba(24, 24, 27, 0.25);
+  transform: translateY(-1px);
+}
+
+/* Metrics Strip */
+.metricsStrip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  padding-top: 0.75rem;
+}
+
+.metricCard {
+  border-left: 2px solid #18181b;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.metricValue {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #09090b;
+  letter-spacing: -0.03em;
+}
+
+.metricDescription {
+  font-size: 0.74rem;
+  color: #71717a;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
