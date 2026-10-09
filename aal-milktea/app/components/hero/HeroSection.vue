@@ -26,7 +26,7 @@ onMounted(() => {
         <p :class="$style.subheadline">
           Wholesale beverage ingredients, food-grade packaging, and turnkey
           commercial machinery—sourced directly from verified manufacturing
-          partners across Asia and Europe[cite: 3, 4].
+          partners across Asia and Europe.
         </p>
       </div>
 
@@ -46,6 +46,18 @@ onMounted(() => {
         </div>
       </div>
     </div>
+
+    <!-- Accessible Scroll Indicator -->
+    <a
+      href="#about"
+      :class="$style.scrollIndicator"
+      aria-label="Scroll to About section"
+    >
+      <span :class="$style.mouseShell">
+        <span :class="$style.mouseWheel" />
+      </span>
+      <span :class="$style.scrollLabel">SCROLL</span>
+    </a>
   </section>
 </template>
 

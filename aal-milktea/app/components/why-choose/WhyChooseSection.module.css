@@ -2,8 +2,8 @@
    Section Base & Desktop Screen Fit
    ========================================================================== */
 
-.valuesSection {
-  background-color: #fbfbfa;
+.whySection {
+  background-color: #ffffff;
   color: #111111;
   position: relative;
   width: 100%;
@@ -11,13 +11,13 @@
   border-bottom: 1px solid #e5e5e5;
   box-sizing: border-box;
 
-  /* Natural vertical scroll on mobile */
+  /* Natural scroll on mobile devices */
   padding: 5rem 1.25rem 4.5rem;
 }
 
 @media (min-width: 1024px) {
-  .valuesSection {
-    /* Fits directly inside the 100dvh PC screen height without vertical cutoff */
+  .whySection {
+    /* Locks cleanly inside the desktop viewport without cutoff */
     min-height: 100dvh;
     max-height: 100dvh;
     display: flex;
@@ -39,28 +39,21 @@
 
 @media (min-width: 1024px) {
   .sectionContent {
-    flex-direction: row;
-    align-items: stretch;
-    justify-content: space-between;
-    gap: 3.5rem;
+    gap: 2.5rem;
   }
 }
 
 /* ==========================================================================
-   Left Column: Company Commitment & Narrative
+   Header Block
    ========================================================================== */
-
-.narrativeSide {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 1.5rem;
-  flex: 1 1 48%;
-}
 
 .headerBlock {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 .eyebrow {
@@ -95,105 +88,127 @@
 
 .leadText {
   font-size: 0.95rem;
-  line-height: 1.62;
+  line-height: 1.6;
   color: #52525b;
-  margin-top: 0.9rem;
+  margin-top: 0.85rem;
   margin-bottom: 0;
   letter-spacing: -0.01em;
-  max-width: 560px;
-}
-
-/* Operational Principles Card */
-.commitmentCard {
-  background: #ffffff;
-  border: 1px solid #e4e4e7;
-  border-radius: 12px;
-  padding: 1.4rem 1.5rem;
-  box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.02),
-    0 12px 28px -10px rgba(0, 0, 0, 0.04);
-}
-
-.commitmentCardTitle {
-  font-size: 0.95rem;
-  font-weight: 800;
-  color: #09090b;
-  margin: 0 0 0.4rem;
-  letter-spacing: -0.015em;
-}
-
-.commitmentCardText {
-  font-size: 0.85rem;
-  line-height: 1.55;
-  color: #52525b;
-  margin: 0;
-  letter-spacing: -0.005em;
 }
 
 /* ==========================================================================
-   Right Column: 2x2 Values Matrix
+   5-Card Advantage Matrix (2 Top, 3 Bottom on Desktop)
    ========================================================================== */
 
-.matrixSide {
-  flex: 1 1 52%;
+.advantageGrid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1rem;
+  gap: 1.15rem;
 }
 
 @media (min-width: 640px) {
-  .matrixSide {
+  .advantageGrid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 1.15rem;
   }
 }
 
-.valueCard {
-  background: #ffffff;
+@media (min-width: 1024px) {
+  .advantageGrid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 1.25rem;
+  }
+
+  /* First row: 2 wide cards (each takes 3 columns) */
+  .wideCard {
+    grid-column: span 3;
+  }
+
+  /* Second row: 3 compact cards (each takes 2 columns) */
+  .advantageGrid article:not(.wideCard) {
+    grid-column: span 2;
+  }
+}
+
+.advantageCard {
+  background: #fbfbfa;
   border: 1px solid #e4e4e7;
   border-radius: 12px;
-  padding: 1.35rem 1.25rem;
+  padding: 1.45rem 1.4rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
   transition:
     transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
     border-color 0.2s ease,
     box-shadow 0.2s ease;
 }
 
-.valueCard:hover {
+.advantageCard:hover {
   transform: translateY(-2px);
   border-color: #18181b;
-  box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.05);
 }
 
-.cardHeader {
+.cardTop {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.75rem;
 }
 
-.valNumber {
-  font-size: 1.05rem;
+/* Rounded Icon Frame */
+.iconWrapper {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  border: 1px solid #e4e4e7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #18181b;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.advantageCard:hover .iconWrapper {
+  background-color: #18181b;
+  color: #ffffff;
+  border-color: #18181b;
+}
+
+.scopeTag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #71717a;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cardTitle {
+  font-size: 1.08rem;
   font-weight: 850;
-  color: #09090b;
-  letter-spacing: -0.02em;
-}
-
-.valTitle {
-  font-size: 1.02rem;
-  font-weight: 800;
   letter-spacing: -0.02em;
   color: #09090b;
-  margin: 0 0 0.5rem;
-  line-height: 1.25;
+  margin: 0;
+  line-height: 1.3;
 }
 
-.valDescription {
-  font-size: 0.81rem;
-  line-height: 1.55;
+.cardDescription {
+  font-size: 0.84rem;
+  line-height: 1.58;
   color: #52525b;
   margin: 0;
   letter-spacing: -0.005em;

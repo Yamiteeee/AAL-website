@@ -1,39 +1,34 @@
 <script setup lang="ts">
 interface CompanyValue {
   num: string;
-  title: string;
-  tag: string;
+  name: string;
   description: string;
 }
 
 const values: CompanyValue[] = [
   {
     num: "01",
-    title: "Commitment to Responsibility and Growth",
-    tag: "SUSTAINABILITY & SCALING",
+    name: "Malasakit: The Core of Our Commitment",
     description:
-      "We take pride in managing resources with rigorous care and diligence, driving continuous development to deliver innovative, sustainable solutions that benefit customers, partners, and the broader community[cite: 3].",
+      "At AAL, we take pride in managing our resources with care and responsibility. We believe in continuous growth and development to provide innovative and sustainable products and services that benefit our customers, partners, and the broader community.",
   },
   {
     num: "02",
-    title: "Malasakit: The Core of Our Commitment",
-    tag: "STAKEHOLDER CARE",
+    name: "Commitment to Responsibility and Growth",
     description:
-      "Our guiding cultural principle is Malasakit—the deepest form of care and stewardship[cite: 3]. It challenges us to go above and beyond expectations, ensuring empathetic service that honors the trust of our clients, suppliers, and partners[cite: 3].",
+      "We believe in developing our people by providing opportunities for growth that fuel our collective success, managing resources with care and building a foundation for transparent, long-term expansion.",
   },
   {
     num: "03",
-    title: "Delivering Uncompromising Quality",
-    tag: "STANDARDS & RELIABILITY",
+    name: "Delivering Uncompromising Quality",
     description:
-      "From certified ingredient procurement to global cargo handling, every interaction reflects an uncompromising standard of execution, product safety, and verified compliance[cite: 3].",
+      "We are committed to offering products and services of the highest quality, ensuring reliability, value, and satisfaction for our customers. Every interaction with AAL GROUP reflects our dedication to meeting the highest standards in all that we do.",
   },
   {
     num: "04",
-    title: "Empowering Communities",
-    tag: "MEANINGFUL IMPACT",
+    name: "Empowering Communities",
     description:
-      "Through responsible business practices, equitable trade opportunities, and purposeful engagement, we contribute directly to the economic growth and long-term well-being of the communities we touch[cite: 3].",
+      "We believe in making a positive impact by empowering the communities where we operate. Through responsible business practices, innovative solutions, and meaningful engagements, we contribute to the growth and well-being of the people and environments we serve.",
   },
 ];
 </script>
@@ -41,138 +36,47 @@ const values: CompanyValue[] = [
 <template>
   <section id="values" :class="$style.valuesSection">
     <div :class="$style.sectionContent">
-      <!-- Section Header -->
-      <div :class="$style.headerRow">
-        <div :class="$style.headerLeft">
-          <div :class="$style.eyebrow">
-            <span :class="$style.badge">PEDIGREE &amp; ETHOS</span>
-            <span :class="$style.divider">/</span>
-            <span :class="$style.tagline">FOUNDATIONAL INTEGRITY</span>
-          </div>
+      <!-- Left Column on Desktop: Official Corporate Commitment -->
+      <div :class="$style.narrativeSide">
+        <div :class="$style.headerBlock">
+          <span :class="$style.eyebrow">COMPANY VALUES</span>
           <h2 :class="$style.headline">
-            Guided by Purpose. <br />
-            <span :class="$style.headlineMuted"
-              >Built on Malasakit[cite: 3].</span
-            >
+            Our Commitment. <br />
+            <span :class="$style.headlineMuted">“Together, We Grow”</span>
           </h2>
-        </div>
-
-        <div :class="$style.headerRight">
           <p :class="$style.leadText">
-            Founded on May 1, 2020 by brothers Andrei Ang Lim and Andrew Ang
-            Lim, AAL Group was built on the premise that global enterprise and
-            genuine stewardship must move together[cite: 3].
-          </p>
-        </div>
-      </div>
-
-      <!-- Founders & Leadership Ledger -->
-      <div :class="$style.foundersGrid">
-        <!-- Andrei Ang Lim Profile Card -->
-        <article :class="$style.founderCard">
-          <div :class="$style.founderHeader">
-            <div :class="$style.founderBadge">EXECUTIVE LEADERSHIP</div>
-            <span :class="$style.founderTenure">CO-FOUNDER[cite: 3]</span>
-          </div>
-
-          <div :class="$style.founderIdentity">
-            <h3 :class="$style.founderName">Mr. Andrei Ang Lim[cite: 3]</h3>
-            <span :class="$style.founderRole">President[cite: 3]</span>
-          </div>
-
-          <p :class="$style.founderBio">
-            Spearheads corporate strategy, cross-border business development,
-            and sovereign trade corridors. Driven by a vision to connect
-            Filipino enterprise to tier-one global manufacturing hubs[cite: 3,
-            4].
-          </p>
-
-          <div :class="$style.founderQuote">
-            <p>
-              “From startup sparks to growing empires, we move with you.”[cite:
-              4]
-            </p>
-          </div>
-        </article>
-
-        <!-- Andrew Ang Lim Profile Card -->
-        <article :class="$style.founderCard">
-          <div :class="$style.founderHeader">
-            <div :class="$style.founderBadge">OPERATIONAL LEADERSHIP</div>
-            <span :class="$style.founderTenure">CO-FOUNDER[cite: 3]</span>
-          </div>
-
-          <div :class="$style.founderIdentity">
-            <h3 :class="$style.founderName">Mr. Andrew Ang Lim[cite: 3]</h3>
-            <span :class="$style.founderRole">Vice President[cite: 3]</span>
-          </div>
-
-          <p :class="$style.founderBio">
-            Oversees operational integrity, manufacturing quality audits, and
-            end-to-end supply chain logistics. Ensures high standards of
-            compliance and fulfillment across all corridors[cite: 3].
-          </p>
-
-          <div :class="$style.founderQuote">
-            <p>
-              “Uncompromising quality is not an ambition—it is our operating
-              baseline.”[cite: 3]
-            </p>
-          </div>
-        </article>
-      </div>
-
-      <!-- Mission & Vision Architectural Block -->
-      <div :class="$style.missionVisionBlock">
-        <div :class="$style.mvColumn">
-          <div :class="$style.mvTag">CORPORATE VISION</div>
-          <h4 :class="$style.mvTitle">
-            Shaping Industry with Unwavering Integrity[cite: 3]
-          </h4>
-          <p :class="$style.mvDescription">
-            To be a globally recognized leader in cross-border trading and
-            supply chains, shaping the future with groundbreaking ideas,
-            uplifting lives, and creating opportunities that help communities
-            thrive[cite: 3, 4].
+            At AAL GROUP, we conduct business each day with absolute integrity,
+            honesty, and passion, working closely as a team to meet our
+            customers' needs. We lead by offering exceptional products and
+            services that help customers achieve their goals, while setting an
+            example through our commitment to giving back to the communities
+            where we operate.
           </p>
         </div>
 
-        <div :class="$style.mvDivider" />
-
-        <div :class="$style.mvColumn">
-          <div :class="$style.mvTag">CORPORATE MISSION</div>
-          <h4 :class="$style.mvTitle">
-            Paving the Way to a Better Life for Everyone We Serve[cite: 3]
-          </h4>
-          <p :class="$style.mvDescription">
-            Delivering products and services that embody integrity, excellence,
-            and innovation[cite: 3]. We empower communities, facilitate
-            sustainable growth, and provide end-to-end solutions that elevate
-            every client[cite: 3, 4].
-          </p>
-        </div>
-      </div>
-
-      <!-- Core Values 4-Pillar Grid -->
-      <div :class="$style.valuesContainer">
-        <div :class="$style.valuesHeader">
-          <h3 :class="$style.valuesTitle">
-            The Four Pillars of Operation[cite: 3]
+        <!-- Transparency & Operational Foundations Callout -->
+        <div :class="$style.commitmentCard">
+          <h3 :class="$style.commitmentCardTitle">
+            The Principles Guiding Every Step
           </h3>
-          <span :class="$style.valuesSubtitle"
-            >Guiding principles across all global touchpoints[cite: 3]</span
-          >
+          <p :class="$style.commitmentCardText">
+            As we continue to grow and expand our reach, we believe it is
+            essential to be transparent about the principles that guide us in
+            every aspect of our business. These core values form the foundation
+            of our operations, reflecting our dedication to delivering
+            outstanding products and services to our customers and partners.
+          </p>
         </div>
+      </div>
 
-        <div :class="$style.valuesGrid">
-          <div v-for="val in values" :key="val.num" :class="$style.valueCard">
-            <div :class="$style.valTop">
-              <span :class="$style.valNum">{{ val.num }}</span>
-              <span :class="$style.valTag">{{ val.tag }}</span>
-            </div>
-            <h4 :class="$style.valTitle">{{ val.title }}[cite: 3]</h4>
-            <p :class="$style.valDescription">{{ val.description }}</p>
+      <!-- Right Column on Desktop: 2x2 Official Core Values Matrix -->
+      <div :class="$style.matrixSide">
+        <div v-for="val in values" :key="val.num" :class="$style.valueCard">
+          <div :class="$style.cardHeader">
+            <span :class="$style.valNumber">{{ val.num }}</span>
           </div>
+          <h3 :class="$style.valTitle">{{ val.name }}</h3>
+          <p :class="$style.valDescription">{{ val.description }}</p>
         </div>
       </div>
     </div>

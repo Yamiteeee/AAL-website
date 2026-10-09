@@ -1,78 +1,39 @@
 <script setup lang="ts">
-interface ServicePillar {
-  index: string;
+interface PipelineStep {
+  step: string;
   title: string;
-  subtitle: string;
+  category: string;
   description: string;
-  highlights: string[];
-  scope: string;
 }
 
-const services: ServicePillar[] = [
+const workflow: PipelineStep[] = [
   {
-    index: "01",
-    title: "Import & Export",
-    subtitle: "Customs & Regulatory Clearance",
+    step: "01",
+    title: "Global Sourcing",
+    category: "Verified Factories",
     description:
-      "End-to-end management of cross-border trade compliances, full customs clearance, tariffs classification, and global manifest documentation[cite: 4].",
-    highlights: [
-      "Full Customs Documentation[cite: 4]",
-      "Cross-Border Tax & Tariffs",
-      "Compliance Port Clearance[cite: 4]",
-    ],
-    scope: "Global Trade Corridors",
+      "Direct factory procurement across premier industrial hubs in Asia and Europe with zero intermediary markups.",
   },
   {
-    index: "02",
-    title: "Freight Forwarding",
-    subtitle: "Multi-Modal Cargo Logistics",
+    step: "02",
+    title: "Custom Formulation & OEM",
+    category: "Turnkey Production",
     description:
-      "Flexible LCL (Less than Container Load) and FCL (Full Container Load) solutions spanning sea, air, and land routes with localized port consolidation[cite: 4].",
-    highlights: [
-      "LCL & FCL Ocean Freight[cite: 4]",
-      "Expedited Air Cargo[cite: 4]",
-      "Port Consolidation & Warehousing[cite: 4]",
-    ],
-    scope: "Sea · Air · Land[cite: 4]",
+      "Private-label branding, custom ingredients, recipes, and food-grade packaging built to your specifications.",
   },
   {
-    index: "03",
-    title: "Product Sourcing",
-    subtitle: "Verified Factory Procurement",
+    step: "03",
+    title: "Freight & Port Logistics",
+    category: "Sea, Air & Land",
     description:
-      "Direct factory procurement across premier industrial hubs in Asia and Europe, matching brand specifications with rigorously audited facilities[cite: 4].",
-    highlights: [
-      "Asia: CN, KR, TH, VN[cite: 4]",
-      "Europe: DE, FR, IT, PL[cite: 4]",
-      "Rigorous Factory Audits[cite: 3]",
-    ],
-    scope: "11+ Global Hubs[cite: 4]",
+      "Flexible full container and consolidation routes connecting sovereign ports directly to local warehouses.",
   },
   {
-    index: "04",
-    title: "OEM/ODM Manufacturing",
-    subtitle: "Turnkey Private Labeling",
+    step: "04",
+    title: "Customs & Last-Mile Delivery",
+    category: "End-to-End Fulfillment",
     description:
-      "Comprehensive formulation, private-label packaging, and factory-direct production for skincare, F&B ingredients, wellness, and specialty goods[cite: 4].",
-    highlights: [
-      "Skincare & Formulation[cite: 4]",
-      "F&B Ingredients & Recipes[cite: 3, 4]",
-      "Custom Packaging & Labeling[cite: 4]",
-    ],
-    scope: "Custom Formulation[cite: 4]",
-  },
-  {
-    index: "05",
-    title: "Business Model Creation",
-    subtitle: "Enterprise Setup & Scaling",
-    description:
-      "Holistic commercial structuring designed to scale brands efficiently—from domestic retail supply chains to cross-border e-commerce distribution[cite: 4].",
-    highlights: [
-      "Retail Supply Chains[cite: 4]",
-      "E-Commerce Fulfillment Setup[cite: 4]",
-      "Regional Distribution Systems[cite: 4]",
-    ],
-    scope: "Startup to Enterprise",
+      "Complete import clearance, duty processing, and direct door-to-door cargo fulfillment ready for commercial sale.",
   },
 ];
 </script>
@@ -80,68 +41,51 @@ const services: ServicePillar[] = [
 <template>
   <section id="services" :class="$style.servicesSection">
     <div :class="$style.sectionContent">
-      <div :class="$style.headerRow">
-        <div :class="$style.headerLeft">
-          <div :class="$style.eyebrow">
-            <span :class="$style.badge">CAPABILITIES</span>
-            <span :class="$style.divider">/</span>
-            <span :class="$style.tagline"
-              >END-TO-END SUPPLY INFRASTRUCTURE</span
-            >
-          </div>
-          <h2 :class="$style.headline">
-            Structured for Reliability. <br />
-            <span :class="$style.headlineMuted"
-              >Engineered for Global Flow.</span
-            >
-          </h2>
-        </div>
-
-        <div :class="$style.headerRight">
-          <p :class="$style.leadText">
-            From single-pallet ingredient imports to multi-container factory
-            production lines, we remove international trade friction with
-            transparent logistics and strict quality controls.
-          </p>
-        </div>
+      <!-- Centered Editorial Header -->
+      <div :class="$style.headerBlock">
+        <span :class="$style.eyebrow">OUR CAPABILITIES</span>
+        <h2 :class="$style.headline">
+          How We Move Cargo. <br />
+          <span :class="$style.headlineMuted">From Origin to Your Door.</span>
+        </h2>
+        <p :class="$style.leadText">
+          A streamlined 4-step supply chain that eliminates middlemen, ensures
+          verified quality, and accelerates cross-border trade.
+        </p>
       </div>
 
-      <div :class="$style.servicesGrid">
-        <article
-          v-for="service in services"
-          :key="service.index"
-          :class="[
-            $style.serviceCard,
-            service.index === '01' || service.index === '02'
-              ? $style.featuredCard
-              : '',
-          ]"
-        >
-          <div :class="$style.cardTop">
-            <div :class="$style.indexMarker">{{ service.index }}</div>
-            <span :class="$style.scopeTag">{{ service.scope }}</span>
+      <!-- Linear Step-by-Step Pipeline Flow -->
+      <div :class="$style.pipelineGrid">
+        <template v-for="(item, index) in workflow" :key="item.step">
+          <!-- Step Card -->
+          <div :class="$style.stepCard">
+            <div :class="$style.cardHeader">
+              <span :class="$style.stepNumber">{{ item.step }}</span>
+              <span :class="$style.categoryTag">{{ item.category }}</span>
+            </div>
+
+            <h3 :class="$style.cardTitle">{{ item.title }}</h3>
+            <p :class="$style.cardDescription">{{ item.description }}</p>
           </div>
 
-          <div :class="$style.cardBody">
-            <span :class="$style.cardSubtitle">{{ service.subtitle }}</span>
-            <h3 :class="$style.cardTitle">{{ service.title }}</h3>
-            <p :class="$style.cardDescription">{{ service.description }}</p>
+          <!-- Connecting Flow Arrow (Between Steps) -->
+          <div
+            v-if="index < workflow.length - 1"
+            :class="$style.flowConnector"
+            aria-hidden="true"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
           </div>
-
-          <div :class="$style.cardFooter">
-            <div :class="$style.highlightTitle">Key Capabilities</div>
-            <ul :class="$style.highlightList">
-              <li
-                v-for="item in service.highlights"
-                :key="item"
-                :class="$style.highlightItem"
-              >
-                <span :class="$style.bulletDot" />
-                <span>{{ item }}</span>
-              </li>
-            </ul>
-          </div>
-        </article>
+        </template>
       </div>
     </div>
   </section>

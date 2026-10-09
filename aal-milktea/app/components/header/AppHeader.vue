@@ -5,15 +5,20 @@ const isScrolled = ref(false);
 const isMobileOpen = ref(false);
 
 const navLinks = [
-  { label: "Overview", href: "#overview" },
-  { label: "Core Services", href: "#services" },
+  { label: "About", href: "#about" },
   { label: "Global Network", href: "#network" },
-  { label: "Founders & Values", href: "#values" },
-  { label: "Contact", href: "#contact" },
+  { label: "Capabilities", href: "#services" },
+  { label: "Values", href: "#values" },
+  { label: "Founders", href: "#founders" },
+  { label: "Why Us", href: "#why-choose" },
 ];
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 20;
+};
+
+const closeMobile = () => {
+  isMobileOpen.value = false;
 };
 
 onMounted(() => {
@@ -28,8 +33,8 @@ onUnmounted(() => {
 <template>
   <header :class="[$style.headerWrapper, isScrolled ? $style.isScrolled : '']">
     <div :class="$style.navContainer">
-      <!-- Brand Logo Link with PNG -->
-      <NuxtLink to="/" :class="$style.brandLogo">
+      <!-- Brand Logo -->
+      <NuxtLink to="/" :class="$style.brandLogo" @click="closeMobile">
         <img
           src="/images/aal-pin.png"
           alt="AAL Group Logo"
@@ -40,7 +45,9 @@ onUnmounted(() => {
           <span :class="$style.brandMotto">Together, we grow</span>
         </div>
       </NuxtLink>
-      <nav aria-label="Main Navigation">
+
+      <!-- Desktop Nav Ordered by Page Flow -->
+      <nav aria-label="Main Navigation" :class="$style.desktopNav">
         <ul :class="$style.navLinks">
           <li v-for="link in navLinks" :key="link.label">
             <a :href="link.href" :class="$style.navLink">{{ link.label }}</a>
@@ -48,16 +55,19 @@ onUnmounted(() => {
         </ul>
       </nav>
 
+      <!-- Right Actions -->
       <div :class="$style.headerAction">
         <a href="#contact" :class="$style.contactBtn">Get In Touch</a>
+
         <button
           type="button"
           :class="$style.mobileToggle"
+          :aria-expanded="isMobileOpen"
           aria-label="Toggle Navigation"
           @click="isMobileOpen = !isMobileOpen"
         >
           <svg
-            xmlns="http://www.w3.org/2000/svg"
+            v-if="!isMobileOpen"
             width="22"
             height="22"
             viewBox="0 0 24 24"
@@ -68,27 +78,48 @@ onUnmounted(() => {
             <line x1="3" y1="7" x2="21" y2="7" />
             <line x1="3" y1="17" x2="21" y2="17" />
           </svg>
+          <svg
+            v-else
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          >
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
         </button>
       </div>
     </div>
 
-    <div v-show="isMobileOpen" :class="$style.mobileMenu">
-      <a
-        v-for="link in navLinks"
-        :key="link.label"
-        :href="link.href"
-        @click="isMobileOpen = false"
-      >
-        {{ link.label }}
-      </a>
-      <a
-        href="#contact"
-        style="color: #666; font-size: 0.85rem"
-        @click="isMobileOpen = false"
-      >
-        global@aalgroup.asia[cite: 4]
-      </a>
-    </div>
+    <!-- Mobile Navigation Drawer -->
+    <Transition name="fade">
+      <div v-if="isMobileOpen" :class="$style.mobileMenu">
+        <div :class="$style.mobileLinks">
+          <a
+            v-for="link in navLinks"
+            :key="link.label"
+            :href="link.href"
+            :class="$style.mobileLink"
+            @click="closeMobile"
+          >
+            {{ link.label }}
+          </a>
+        </div>
+        <div :class="$style.mobileFooter">
+          <a
+            href="#contact"
+            :class="$style.mobileContactBtn"
+            @click="closeMobile"
+          >
+            Get In Touch
+          </a>
+          <span :class="$style.mobileEmail">global@aalgroup.asia</span>
+        </div>
+      </div>
+    </Transition>
   </header>
 </template>
 

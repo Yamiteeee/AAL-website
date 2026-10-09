@@ -1,0 +1,221 @@
+.aboutSection {
+  background-color: #fbfbfa;
+  color: #111111;
+  padding: 5.5rem 1.25rem 5rem;
+  border-top: 1px solid #e5e5e5;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .aboutSection {
+    padding: 7.5rem 2rem 6.5rem;
+  }
+}
+
+.sectionContent {
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* ==========================================================================
+   Header Block (Centered)
+   ========================================================================== */
+
+.headerBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #71717a;
+  margin-bottom: 0.85rem;
+}
+
+.headline {
+  font-size: 2.35rem;
+  line-height: 1.1;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  color: #09090b;
+  margin: 0;
+}
+
+@media (min-width: 768px) {
+  .headline {
+    font-size: 3.25rem;
+    line-height: 1.06;
+  }
+}
+
+.headlineMuted {
+  color: #71717a;
+  font-weight: 700;
+}
+
+.leadText {
+  font-size: 1.02rem;
+  line-height: 1.68;
+  color: #52525b;
+  margin-top: 1.25rem;
+  margin-bottom: 0;
+  letter-spacing: -0.01em;
+}
+
+@media (min-width: 768px) {
+  .leadText {
+    font-size: 1.1rem;
+  }
+}
+
+/* ==========================================================================
+   Narrative Grid Layout
+   ========================================================================== */
+
+.narrativeGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 992px) {
+  .narrativeGrid {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 2rem;
+    align-items: stretch;
+  }
+}
+
+/* Left Card: Story & Big Facility Stats */
+.storyCard {
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 12px;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+@media (min-width: 768px) {
+  .storyCard {
+    padding: 2.5rem 2.25rem;
+  }
+}
+
+.cardTag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  margin-bottom: 0.6rem;
+}
+
+.cardHeading {
+  font-size: 1.5rem;
+  font-weight: 850;
+  letter-spacing: -0.03em;
+  color: #09090b;
+  margin: 0 0 1rem;
+  line-height: 1.2;
+}
+
+.cardBody {
+  font-size: 0.95rem;
+  line-height: 1.68;
+  color: #52525b;
+  margin: 0;
+}
+
+.storyFooter {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  border-top: 1px solid #f4f4f5;
+  margin-top: 2rem;
+  padding-top: 1.75rem;
+}
+
+.facilityStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.statNumber {
+  font-size: 1.75rem;
+  font-weight: 850;
+  letter-spacing: -0.03em;
+  color: #09090b;
+}
+
+.statLabel {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #71717a;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+}
+
+/* Right Column: 3 Pillar Cards */
+.pillarsCol {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pillarCard {
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 10px;
+  padding: 1.5rem 1.4rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.pillarCard:hover {
+  transform: translateY(-2px);
+  border-color: #18181b;
+}
+
+.pillarIndex {
+  font-family: Georgia, serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #71717a;
+  line-height: 1;
+  padding-top: 2px;
+}
+
+.pillarTitle {
+  font-size: 1.05rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #09090b;
+  margin: 0 0 0.35rem;
+}
+
+.pillarBody {
+  font-size: 0.85rem;
+  line-height: 1.6;
+  color: #52525b;
+  margin: 0;
+}

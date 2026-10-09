@@ -9,27 +9,18 @@ const { hubs, activeHub, projectedHubs, focusHub } = useTradeMap(mapContainer);
 <template>
   <section id="network" :class="$style.networkSection">
     <div :class="$style.sectionContent">
-      <!-- Section Header -->
-      <div :class="$style.headerRow">
-        <div :class="$style.headerLeft">
-          <div :class="$style.eyebrow">
-            <span :class="$style.badge">GLOBAL NETWORK</span>
-            <span :class="$style.divider">/</span>
-            <span :class="$style.tagline">VERIFIED MANUFACTURING HUBS</span>
-          </div>
-          <h2 :class="$style.headline">
-            Cross-Border Reach. <br />
-            <span :class="$style.headlineMuted">Local Execution.</span>
-          </h2>
-        </div>
-
-        <div :class="$style.headerRight">
-          <p :class="$style.leadText">
-            We operate across 11 key international trading corridors spanning
-            Asia, Europe, and Oceania[cite: 4], anchored by our Central
-            Distribution Hub in Manila, Philippines[cite: 4].
-          </p>
-        </div>
+      <!-- Centered Header Block -->
+      <div :class="$style.headerBlock">
+        <span :class="$style.eyebrow">GLOBAL NETWORK</span>
+        <h2 :class="$style.headline">
+          Cross-Border Reach. <br />
+          <span :class="$style.headlineMuted">Local Execution.</span>
+        </h2>
+        <p :class="$style.leadText">
+          Operating across 11 international trading corridors spanning Asia,
+          Europe, and Oceania, anchored by our Central Distribution Hub in the
+          Philippines.
+        </p>
       </div>
 
       <!-- Live Vector Map Container -->
@@ -37,10 +28,10 @@ const { hubs, activeHub, projectedHubs, focusHub } = useTradeMap(mapContainer);
         <div :class="$style.mapControls">
           <div :class="$style.mapStatus">
             <span :class="$style.statusIndicator" />
-            <span>Active Global Trading &amp; Sourcing Network</span>
+            <span>Active Trading &amp; Sourcing Network</span>
           </div>
           <span :class="$style.mapInstructions">
-            Select a network pin or country pill to view trade focus
+            Select a pin or country to view trade focus
           </span>
         </div>
 

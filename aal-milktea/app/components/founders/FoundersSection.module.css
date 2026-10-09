@@ -1,0 +1,295 @@
+.foundersSection {
+  background-color: #ffffff;
+  color: #111111;
+  position: relative;
+  width: 100%;
+  border-top: 1px solid #e5e5e5;
+  border-bottom: 1px solid #e5e5e5;
+  box-sizing: border-box;
+
+  /* Natural scroll on mobile */
+  padding: 5rem 1.25rem 4rem;
+}
+
+@media (min-width: 1024px) {
+  .foundersSection {
+    /* Locks cleanly inside the PC viewport */
+    min-height: 100dvh;
+    max-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2.5rem 2rem;
+    overflow: hidden;
+  }
+}
+
+.sectionContent {
+  max-width: 1320px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .sectionContent {
+    gap: 2.25rem;
+  }
+}
+
+/* ==========================================================================
+   Header Block (Compact for Viewport Fit)
+   ========================================================================== */
+
+.headerBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #71717a;
+  margin-bottom: 0.4rem;
+}
+
+.headline {
+  font-size: 2.15rem;
+  line-height: 1.1;
+  font-weight: 850;
+  letter-spacing: -0.04em;
+  color: #09090b;
+  margin: 0;
+}
+
+@media (min-width: 1024px) {
+  .headline {
+    font-size: 2.75rem;
+    line-height: 1.05;
+  }
+}
+
+.headlineMuted {
+  color: #71717a;
+  font-weight: 700;
+}
+
+.leadText {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #52525b;
+  margin-top: 0.65rem;
+  margin-bottom: 0;
+  letter-spacing: -0.01em;
+}
+
+/* ==========================================================================
+   2-Column Founders Grid
+   ========================================================================== */
+
+.foundersGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+  .foundersGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.75rem;
+    align-items: stretch;
+  }
+}
+
+.founderCard {
+  background: #fbfbfa;
+  border: 1px solid #e4e4e7;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+  transition:
+    transform 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+/* On PC: Side-by-side inside the card so height stays under 380px */
+@media (min-width: 1024px) {
+  .founderCard {
+    flex-direction: row;
+    align-items: stretch;
+  }
+}
+
+.founderCard:hover {
+  transform: translateY(-2px);
+  border-color: #18181b;
+  box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.05);
+}
+
+/* ==========================================================================
+   Image Container (Uncropped Headshot Anchor)
+   ========================================================================== */
+
+.photoFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background-color: #f4f4f5;
+  border-bottom: 1px solid #e4e4e7;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+@media (min-width: 1024px) {
+  .photoFrame {
+    width: 40%;
+    aspect-ratio: auto;
+    border-bottom: none;
+    border-right: 1px solid #e4e4e7;
+  }
+}
+
+.placeholderAvatar {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  background: linear-gradient(135deg, #f4f4f5 0%, #e4e4e7 100%);
+  color: #71717a;
+}
+
+.avatarInitials {
+  font-size: 1.75rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #18181b;
+  background: #ffffff;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #d4d4d8;
+}
+
+.placeholderHint {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: #a1a1aa;
+}
+
+.founderPhoto {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Retains full hair, crown, and collar without zooming */
+  object-position: center 10%;
+  z-index: 2;
+}
+
+/* ==========================================================================
+   Card Content
+   ========================================================================== */
+
+.cardBody {
+  padding: 1.35rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+
+@media (min-width: 1024px) {
+  .cardBody {
+    padding: 1.5rem 1.4rem;
+    width: 60%;
+  }
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.roleBadge {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #18181b;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  padding: 2px 7px;
+  border-radius: 4px;
+}
+
+.corpTenure {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #a1a1aa;
+}
+
+.founderName {
+  font-size: 1.25rem;
+  font-weight: 850;
+  letter-spacing: -0.025em;
+  color: #09090b;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.founderRole {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #71717a;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 0.2rem;
+  margin-bottom: 0.6rem;
+}
+
+.founderBio {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #52525b;
+  margin: 0 0 1rem;
+  letter-spacing: -0.005em;
+}
+
+.founderQuote {
+  margin-top: auto;
+  border-left: 2px solid #18181b;
+  padding-left: 0.75rem;
+  margin-left: 0;
+  margin-bottom: 0;
+}
+
+.founderQuote p {
+  font-size: 0.8rem;
+  font-style: italic;
+  font-weight: 500;
+  color: #18181b;
+  line-height: 1.45;
+  margin: 0;
+}
