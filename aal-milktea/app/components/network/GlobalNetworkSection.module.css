@@ -1,9 +1,9 @@
 .networkSection {
-  background-color: #ffffff;
-  color: #111111;
+  background-color: #1e1e22;
+  color: #ececee;
   padding: 5.5rem 1.25rem 5rem;
-  border-top: 1px solid #e5e5e5;
-  border-bottom: 1px solid #e5e5e5;
+  border-top: 1px solid #2d2d34;
+  border-bottom: 1px solid #2d2d34;
   position: relative;
 }
 
@@ -40,7 +40,7 @@
   font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: #71717a;
+  color: #b0b0ba;
   margin-bottom: 0.85rem;
 }
 
@@ -49,7 +49,7 @@
   line-height: 1.1;
   font-weight: 850;
   letter-spacing: -0.04em;
-  color: #09090b;
+  color: #ffffff;
   margin: 0;
 }
 
@@ -61,14 +61,14 @@
 }
 
 .headlineMuted {
-  color: #71717a;
+  color: #9494a0;
   font-weight: 700;
 }
 
 .leadText {
   font-size: 1.02rem;
   line-height: 1.68;
-  color: #52525b;
+  color: #c4c4ce;
   margin-top: 1.15rem;
   margin-bottom: 0;
   letter-spacing: -0.01em;
@@ -81,19 +81,19 @@
 }
 
 /* ==========================================================================
-   Map Shell & Viewport
+   Map Shell & Viewport (Soft Charcoal)
    ========================================================================== */
 
 .mapWrapper {
   position: relative;
   width: 100%;
-  background: #ffffff;
-  border: 1px solid #e4e4e7;
+  background: #28282e;
+  border: 1px solid #383842;
   border-radius: 12px;
   padding: 0.85rem;
   box-shadow:
-    0 1px 3px rgba(0, 0, 0, 0.03),
-    0 16px 36px -12px rgba(0, 0, 0, 0.05);
+    0 1px 3px rgba(0, 0, 0, 0.15),
+    0 20px 40px -12px rgba(0, 0, 0, 0.25);
 }
 
 @media (min-width: 768px) {
@@ -108,7 +108,7 @@
   align-items: flex-start;
   gap: 0.35rem;
   padding-bottom: 0.75rem;
-  border-bottom: 1px solid #f4f4f5;
+  border-bottom: 1px solid #33333b;
   margin-bottom: 0.75rem;
 }
 
@@ -129,7 +129,7 @@
   font-weight: 700;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: #18181b;
+  color: #f1f1f4;
 }
 
 .statusIndicator {
@@ -137,7 +137,7 @@
   height: 6px;
   background-color: #10b981;
   border-radius: 9999px;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
   animation: pulse 2.2s infinite cubic-bezier(0.4, 0, 0.6, 1);
 }
 
@@ -155,7 +155,7 @@
 
 .mapInstructions {
   font-size: 0.7rem;
-  color: #a1a1aa;
+  color: #9494a0;
 }
 
 .mapArea {
@@ -165,8 +165,8 @@
   min-height: 440px;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid #e5e5e5;
-  background: #f4f3f0;
+  border: 1px solid #383842;
+  background: #18181c;
 }
 
 @media (min-width: 768px) {
@@ -181,7 +181,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  background: #f4f3f0;
+  background: #18181c;
 }
 
 .mapOverlay {
@@ -204,8 +204,8 @@
 .inspectorBar {
   margin-top: 0.85rem;
   padding: 0.85rem 1rem;
-  background: #fafafa;
-  border: 1px solid #f4f4f5;
+  background: #232329;
+  border: 1px solid #33333c;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -231,9 +231,9 @@
 
 .activeCountry {
   font-size: 1.05rem;
-  font-weight: 800;
+  font-weight: 850;
   letter-spacing: -0.02em;
-  color: #09090b;
+  color: #ffffff;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -250,23 +250,23 @@
 .activeCity {
   font-size: 0.8rem;
   font-weight: 500;
-  color: #71717a;
+  color: #b0b0ba;
 }
 
 .badgePill {
   font-size: 0.65rem;
-  background: #ffffff;
-  color: #18181b;
+  background: #33333c;
+  color: #f1f1f4;
   padding: 2px 7px;
   border-radius: 4px;
   font-weight: 700;
-  border: 1px solid #e4e4e7;
+  border: 1px solid #43434e;
   letter-spacing: 0.03em;
 }
 
 .activeRole {
   font-size: 0.84rem;
-  color: #52525b;
+  color: #b0b0ba;
   line-height: 1.45;
 }
 
@@ -302,12 +302,12 @@
 .hubPill {
   white-space: nowrap;
   padding: 0.35rem 0.75rem;
-  background: #ffffff;
-  border: 1px solid #e4e4e7;
+  background: #2a2a30;
+  border: 1px solid #383842;
   border-radius: 6px;
   font-size: 0.72rem;
   font-weight: 600;
-  color: #3f3f46;
+  color: #d4d4dc;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   min-height: 32px;
@@ -316,14 +316,14 @@
 }
 
 .hubPill:hover {
-  background: #f4f4f5;
-  border-color: #d4d4d8;
-  color: #18181b;
+  background: #36363e;
+  border-color: #4a4a56;
+  color: #ffffff;
 }
 
 .activePill {
-  background: #18181b !important;
-  color: #ffffff !important;
-  border-color: #18181b !important;
-  box-shadow: 0 2px 8px rgba(24, 24, 27, 0.2);
+  background: #ffffff !important;
+  color: #18181c !important;
+  border-color: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }

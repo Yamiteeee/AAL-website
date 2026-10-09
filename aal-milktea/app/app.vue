@@ -8,6 +8,7 @@ import AboutSection from "@/components/about/AboutSection.vue";
 import FoundersSection from "@/components/founders/FoundersSection.vue";
 import WhyChooseSection from "@/components/why-choose/WhyChooseSection.vue";
 import AppFooter from "@/components/footer/AppFooter.vue";
+import ContactSection from "@/components/contact/ContactSection.vue";
 </script>
 
 <template>
@@ -20,6 +21,7 @@ import AppFooter from "@/components/footer/AppFooter.vue";
     <FoundersValuesSection />
     <FoundersSection />
     <WhyChooseSection />
+    <ContactSection />
     <AppFooter />
   </main>
 </template>
