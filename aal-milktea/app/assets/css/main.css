@@ -7,23 +7,29 @@
   padding: 0;
 }
 
+html,
 body {
   font-family:
+    "Inter",
     system-ui,
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
     Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
     sans-serif;
-  background-color: #faf7f2;
-  color: #2d1e18;
+  background-color: #fbfbfa;
+  color: #111111;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 a {
   color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
 }
