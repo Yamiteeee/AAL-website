@@ -28,14 +28,18 @@ onUnmounted(() => {
 <template>
   <header :class="[$style.headerWrapper, isScrolled ? $style.isScrolled : '']">
     <div :class="$style.navContainer">
+      <!-- Brand Logo Link with PNG -->
       <NuxtLink to="/" :class="$style.brandLogo">
-        <div :class="$style.logoMonogram">AAL</div>
+        <img
+          src="/images/aal-pin.png"
+          alt="AAL Group Logo"
+          :class="$style.logoImage"
+        />
         <div :class="$style.brandText">
           <span :class="$style.brandTitle">AAL Group</span>
           <span :class="$style.brandMotto">Together, we grow</span>
         </div>
       </NuxtLink>
-
       <nav aria-label="Main Navigation">
         <ul :class="$style.navLinks">
           <li v-for="link in navLinks" :key="link.label">
@@ -81,8 +85,9 @@ onUnmounted(() => {
         href="#contact"
         style="color: #666; font-size: 0.85rem"
         @click="isMobileOpen = false"
-        >global@aalgroup.asia</a
       >
+        global@aalgroup.asia[cite: 4]
+      </a>
     </div>
   </header>
 </template>

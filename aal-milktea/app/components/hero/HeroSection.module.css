@@ -2,11 +2,17 @@
   position: relative;
   background-color: #fbfbfa;
   color: #111111;
-  padding: 6.5rem 2rem 4rem;
+  padding: 5rem 1.25rem 4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .heroSection {
+    padding: 7rem 2rem 4.5rem;
+  }
 }
 
 .heroContent {
@@ -20,92 +26,251 @@
   gap: 2rem;
 }
 
-/* Header Text */
-.topHeader {
-  display: flex;
-  flex-direction: column;
-  max-width: 820px;
+@media (min-width: 992px) {
+  .heroContent {
+    gap: 2.25rem;
+  }
 }
 
-.taglineBadge {
+/* ==========================================================================
+   Header Block
+   ========================================================================== */
+
+.headerBlock {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.eyebrow {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.72rem;
+  gap: 0.6rem;
+  font-size: 0.68rem;
+  font-weight: 700;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: #71717a;
-  font-weight: 700;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.85rem;
 }
 
-.taglineBadge::before {
-  content: "";
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: #18181b;
+.corpMark {
+  color: #18181b;
+  background: #f4f4f5;
+  padding: 2px 7px;
+  border-radius: 3px;
+  font-size: 0.64rem;
+  letter-spacing: 0.16em;
+}
+
+.divider {
+  color: #d4d4d8;
+  font-weight: 400;
+}
+
+.motto {
+  color: #71717a;
+}
+
+.headlineGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 992px) {
+  .headlineGroup {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 3rem;
+  }
 }
 
 .headline {
-  font-size: 2.45rem;
-  line-height: 1.1;
-  font-weight: 800;
+  font-size: 2.4rem;
+  line-height: 1.08;
+  font-weight: 850;
   letter-spacing: -0.04em;
   color: #09090b;
+  margin: 0;
+  flex: 1 1 60%;
 }
 
 @media (min-width: 768px) {
   .headline {
     font-size: 3.5rem;
+    line-height: 1.05;
+    letter-spacing: -0.045em;
   }
 }
 
-.subheadline {
-  font-size: 1.05rem;
-  line-height: 1.65;
-  color: #52525b;
-  margin-top: 1rem;
-  max-width: 720px;
+.headlineMuted {
+  color: #71717a;
+  font-weight: 700;
 }
 
-/* Map Shell */
+.subheadline {
+  font-size: 0.95rem;
+  line-height: 1.62;
+  color: #52525b;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  flex: 1 1 40%;
+  max-width: 480px;
+}
+
+@media (min-width: 768px) {
+  .subheadline {
+    font-size: 1.02rem;
+    line-height: 1.65;
+  }
+}
+
+/* ==========================================================================
+   Center Credential Ledger (Bridges Header and Map)
+   ========================================================================== */
+
+.credentialLedger {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  background: #ffffff;
+  border: 1px solid #e4e4e7;
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+@media (min-width: 768px) {
+  .credentialLedger {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+    padding: 1.25rem 1.75rem;
+  }
+}
+
+.ledgerCol {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .ledgerCol:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -0.875rem;
+    top: 10%;
+    height: 80%;
+    width: 1px;
+    background-color: #f4f4f5;
+  }
+}
+
+.colTag {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #a1a1aa;
+  margin-bottom: 0.35rem;
+}
+
+.colHeading {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: #09090b;
+  margin: 0 0 0.35rem;
+  letter-spacing: -0.02em;
+}
+
+.colBody {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #52525b;
+  margin: 0;
+}
+
+.quoteBlock {
+  display: flex;
+  flex-direction: column;
+}
+
+.quoteText {
+  font-size: 0.82rem;
+  font-style: italic;
+  font-weight: 500;
+  color: #18181b;
+  line-height: 1.45;
+  margin: 0;
+}
+
+.quoteAuthor {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #71717a;
+  margin-top: 0.35rem;
+}
+
+/* ==========================================================================
+   Map Card Shell & Viewport
+   ========================================================================== */
+
 .mapWrapper {
   position: relative;
   width: 100%;
   background: #ffffff;
   border: 1px solid #e4e4e7;
   border-radius: 12px;
-  padding: 1.25rem;
+  padding: 0.85rem;
   box-shadow:
     0 1px 3px rgba(0, 0, 0, 0.03),
-    0 20px 40px -15px rgba(0, 0, 0, 0.05);
+    0 16px 36px -12px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 768px) {
+  .mapWrapper {
+    padding: 1.25rem;
+  }
 }
 
 .mapControls {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 0.85rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.35rem;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid #f4f4f5;
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .mapControls {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0;
+  }
 }
 
 .mapStatus {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.74rem;
+  gap: 0.5rem;
+  font-size: 0.7rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.07em;
   text-transform: uppercase;
   color: #18181b;
 }
 
 .statusIndicator {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   background-color: #10b981;
   border-radius: 9999px;
   box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
@@ -125,25 +290,30 @@
 }
 
 .mapInstructions {
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   color: #a1a1aa;
-  font-weight: 500;
 }
 
-/* Container enclosing canvas + SVG overlay */
+/* Canvas Area */
 .mapArea {
   position: relative;
   width: 100%;
-  height: 540px;
+  height: 380px;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #e5e5e5;
+  background: #f4f3f0;
+}
+
+@media (min-width: 768px) {
+  .mapArea {
+    height: 520px;
+  }
 }
 
 .mapContainer {
   width: 100%;
   height: 100%;
-  background: #f4f3f0;
 }
 
 .mapOverlay {
@@ -158,136 +328,189 @@
   pointer-events: auto;
 }
 
-/* Animated Dash Corridor Path */
-.flowLine {
-  stroke-dasharray: 6, 6;
-  animation: flowingCorridor 2.5s linear infinite;
-}
+/* ==========================================================================
+   Hub Inspector Panel & Horizontal Navigation
+   ========================================================================== */
 
-@keyframes flowingCorridor {
-  from {
-    stroke-dashoffset: 24;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-/* Inspector Panel */
 .inspectorBar {
-  margin-top: 1rem;
-  padding: 1.15rem 1.35rem;
+  margin-top: 0.85rem;
+  padding: 0.85rem 1rem;
   background: #fafafa;
   border: 1px solid #f4f4f5;
   border-radius: 8px;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.25rem;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+@media (min-width: 992px) {
+  .inspectorBar {
+    margin-top: 1rem;
+    padding: 1.15rem 1.35rem;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+  }
 }
 
 .activeInfo {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.25rem;
 }
 
 .activeCountry {
-  font-size: 1.15rem;
+  font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: -0.02em;
   color: #09090b;
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.45rem;
+}
+
+@media (min-width: 768px) {
+  .activeCountry {
+    font-size: 1.15rem;
+    gap: 0.6rem;
+  }
 }
 
 .activeCity {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 500;
   color: #71717a;
 }
 
 .badgePill {
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   background: #ffffff;
   color: #18181b;
-  padding: 3px 8px;
+  padding: 2px 7px;
   border-radius: 4px;
   font-weight: 700;
   border: 1px solid #e4e4e7;
-  letter-spacing: 0.04em;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  letter-spacing: 0.03em;
 }
 
 .activeRole {
-  font-size: 0.88rem;
+  font-size: 0.84rem;
   color: #52525b;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
-/* Interactive Country Buttons */
+.hubPillsWrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.hubPillsWrapper::-webkit-scrollbar {
+  display: none;
+}
+
 .hubPills {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
+  display: inline-flex;
+  gap: 0.35rem;
+  padding-bottom: 2px;
+}
+
+@media (min-width: 992px) {
+  .hubPillsWrapper {
+    width: auto;
+    overflow-x: visible;
+  }
+  .hubPills {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
 }
 
 .hubPill {
-  padding: 0.4rem 0.85rem;
+  white-space: nowrap;
+  padding: 0.35rem 0.75rem;
   background: #ffffff;
   border: 1px solid #e4e4e7;
   border-radius: 6px;
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 600;
   color: #3f3f46;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .hubPill:hover {
   background: #f4f4f5;
   border-color: #d4d4d8;
   color: #18181b;
-  transform: translateY(-1px);
 }
 
 .activePill {
   background: #18181b !important;
   color: #ffffff !important;
   border-color: #18181b !important;
-  box-shadow: 0 2px 8px rgba(24, 24, 27, 0.25);
-  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(24, 24, 27, 0.2);
 }
 
-/* Metrics Strip */
+/* ==========================================================================
+   Metrics Strip
+   ========================================================================== */
+
 .metricsStrip {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1.5rem;
-  padding-top: 0.75rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem 1rem;
+  padding-top: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .metricsStrip {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    padding-top: 0.75rem;
+  }
 }
 
 .metricCard {
   border-left: 2px solid #18181b;
-  padding-left: 1.1rem;
+  padding-left: 0.85rem;
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
 
+@media (min-width: 768px) {
+  .metricCard {
+    padding-left: 1.1rem;
+  }
+}
+
 .metricValue {
-  font-size: 1.35rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #09090b;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  .metricValue {
+    font-size: 1.35rem;
+    letter-spacing: -0.03em;
+  }
 }
 
 .metricDescription {
-  font-size: 0.74rem;
+  font-size: 0.68rem;
   color: #71717a;
   text-transform: uppercase;
   letter-spacing: 0.08em;
   font-weight: 600;
+  line-height: 1.3;
 }

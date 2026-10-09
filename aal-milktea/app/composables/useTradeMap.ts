@@ -20,7 +20,8 @@ export const defaultHubs: NetworkHub[] = [
     city: "Manila HQ",
     lng: 120.9842,
     lat: 14.5995,
-    specialty: "Central Distribution & Commercial Hub",
+    specialty:
+      "Central Distribution, Commercial Operations & Freight Logistics[cite: 3, 4]",
     badge: "HQ",
   },
   {
@@ -30,7 +31,8 @@ export const defaultHubs: NetworkHub[] = [
     city: "Seoul / Incheon",
     lng: 126.978,
     lat: 37.5665,
-    specialty: "K-beauty & skincare formulation sourcing",
+    specialty:
+      "K-beauty & skincare formulation sourcing (KFDA certified)[cite: 3, 4]",
     badge: "K-Beauty",
   },
   {
@@ -40,7 +42,8 @@ export const defaultHubs: NetworkHub[] = [
     city: "Yiwu / Ningbo",
     lng: 120.075,
     lat: 29.3069,
-    specialty: "Machinery & general goods OEM manufacturing",
+    specialty:
+      "Machinery, industrial OEM/ODM & general goods manufacturing[cite: 3, 4]",
     badge: "Machinery",
   },
   {
@@ -50,7 +53,8 @@ export const defaultHubs: NetworkHub[] = [
     city: "Bangkok",
     lng: 100.5018,
     lat: 13.7563,
-    specialty: "Food, F&B ingredients & regional logistics",
+    specialty:
+      "Food & beverage ingredients sourcing & regional logistics[cite: 3, 4]",
     badge: "Food & Logistics",
   },
   {
@@ -60,7 +64,7 @@ export const defaultHubs: NetworkHub[] = [
     city: "Hanoi",
     lng: 105.8544,
     lat: 21.0285,
-    specialty: "Apparel & artisanal crafts sourcing",
+    specialty: "Apparel & artisanal crafts sourcing and export[cite: 3, 4]",
     badge: "Apparel & Crafts",
   },
   {
@@ -70,7 +74,8 @@ export const defaultHubs: NetworkHub[] = [
     city: "Tokyo",
     lng: 139.6917,
     lat: 35.6895,
-    specialty: "Precision manufacturing & specialty packaging",
+    specialty:
+      "Precision manufacturing, packaging & specialty materials[cite: 4]",
     badge: "Packaging",
   },
   {
@@ -80,7 +85,8 @@ export const defaultHubs: NetworkHub[] = [
     city: "Hamburg / Frankfurt",
     lng: 9.9937,
     lat: 53.5511,
-    specialty: "Nutritional supplements & verified standards",
+    specialty:
+      "Nutritional supplements, active formulas & EU compliance standards[cite: 3, 4]",
     badge: "Supplements",
   },
   {
@@ -90,7 +96,8 @@ export const defaultHubs: NetworkHub[] = [
     city: "Paris",
     lng: 2.3522,
     lat: 48.8566,
-    specialty: "Perfume, fine fragrance & luxury skincare",
+    specialty:
+      "Fine fragrance, luxury perfumery & premium skincare sourcing[cite: 3, 4]",
     badge: "Perfume & Luxury",
   },
   {
@@ -100,7 +107,8 @@ export const defaultHubs: NetworkHub[] = [
     city: "Milan / Rome",
     lng: 9.19,
     lat: 45.4642,
-    specialty: "Artisanal coffee & luxury goods development",
+    specialty:
+      "Artisanal coffee, luxury private label development & goods[cite: 3, 4]",
     badge: "Coffee & Luxury",
   },
   {
@@ -110,7 +118,8 @@ export const defaultHubs: NetworkHub[] = [
     city: "Warsaw",
     lng: 21.0122,
     lat: 52.2297,
-    specialty: "Hygiene & certified medical supplies",
+    specialty:
+      "Hygiene products & CE-certified medical supplies sourcing[cite: 3, 4]",
     badge: "Medical Supplies",
   },
   {
@@ -120,7 +129,8 @@ export const defaultHubs: NetworkHub[] = [
     city: "Sydney",
     lng: 151.2093,
     lat: -33.8688,
-    specialty: "Ocean freight & Oceania trading partner",
+    specialty:
+      "Ocean freight forwarding & Oceania trading partner network[cite: 3, 4]",
     badge: "Oceania Trade",
   },
 ];
@@ -130,60 +140,33 @@ export interface ProjectedHub extends NetworkHub {
   y: number;
 }
 
-export interface ProjectedRoute {
-  id: string;
-  path: string;
-}
-
 export function useTradeMap(
   containerRef: Ref<HTMLElement | null>,
   hubsList: NetworkHub[] = defaultHubs,
 ) {
   const activeHub = ref<NetworkHub>(hubsList[0]!);
   const projectedHubs = ref<ProjectedHub[]>([]);
-  const projectedRoutes = ref<ProjectedRoute[]>([]);
   const mapInstance = shallowRef<any>(null);
   let resizeObserver: ResizeObserver | null = null;
 
   const updateProjections = () => {
     if (!mapInstance.value) return;
 
-    // 1. Project Points
     projectedHubs.value = hubsList.map((hub) => {
       const pos = mapInstance.value.project([hub.lng, hub.lat]);
       return { ...hub, x: pos.x, y: pos.y };
     });
-
-    // 2. Project Curved Flight Paths to Manila
-    const ph =
-      projectedHubs.value.find((h) => h.id === "ph") || projectedHubs.value[0];
-    if (!ph) return;
-
-    projectedRoutes.value = projectedHubs.value
-      .filter((h) => h.id !== ph.id)
-      .map((hub) => {
-        const dx = ph.x - hub.x;
-        const dy = ph.y - hub.y;
-        const dist = Math.hypot(dx, dy);
-
-        // Arc control point curved upward
-        const midX = (hub.x + ph.x) / 2;
-        const midY = (hub.y + ph.y) / 2 - Math.min(dist * 0.18, 45);
-
-        return {
-          id: hub.id,
-          path: `M ${hub.x} ${hub.y} Q ${midX} ${midY} ${ph.x} ${ph.y}`,
-        };
-      });
   };
 
   const focusHub = (hub: NetworkHub) => {
     activeHub.value = hub;
     if (!mapInstance.value) return;
 
+    const isMobile = window.innerWidth < 768;
+
     mapInstance.value.flyTo({
       center: [hub.lng, hub.lat],
-      zoom: hub.id === "au" ? 3.4 : hub.id === "ph" ? 4.2 : 3.8,
+      zoom: hub.id === "au" ? (isMobile ? 2.6 : 3.3) : isMobile ? 3.1 : 3.8,
       speed: 1.2,
       curve: 1.35,
       essential: true,
@@ -193,6 +176,8 @@ export function useTradeMap(
   onMounted(async () => {
     const maplibre = await import("maplibre-gl");
     if (!containerRef.value) return;
+
+    const isMobile = window.innerWidth < 768;
 
     const map = new maplibre.Map({
       container: containerRef.value,
@@ -220,9 +205,9 @@ export function useTradeMap(
           },
         ],
       },
-      center: [108.0, 18.0],
-      zoom: 2.15,
-      minZoom: 1.5,
+      center: isMobile ? [118.0, 16.0] : [108.0, 18.0],
+      zoom: isMobile ? 1.6 : 2.1,
+      minZoom: 1.2,
       maxZoom: 7,
       attributionControl: false,
     });
@@ -261,7 +246,6 @@ export function useTradeMap(
     hubs: hubsList,
     activeHub,
     projectedHubs,
-    projectedRoutes,
     focusHub,
   };
 }
